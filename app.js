@@ -17,12 +17,17 @@ app.get('/register', (req, res) => {
     res.render('pages/register')
 })
 
-app.get('/index', (req, res) => {
+app.get('/home', (req, res) => {
     res.render('pages/index')
 })
 
+const user ={
+    firstName: 'Dom',
+    lastName: 'Pelino'
+}
+
 app.get('/profile', (req, res) => {
-    res.render('pages/profile')
+    res.render('pages/profile', {user:user})
 })
 
 app.get('/logout', (req, res) => {
