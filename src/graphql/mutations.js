@@ -44,11 +44,28 @@ const login = {
     }
 };
 
-const post = {
+const createPost = {
     type: GraphQLString,
     args: {
-        post: { type: GraphQLString },
+        text: {
+            type: GraphQLString
+        },
+        userId: {
+            type: GraphQLString
+        }
     },
+    async resolve(parent, args) {
+
+        const post = new Post({
+            text: args.text,
+            userId: args.userId,
+            createdDate: (new Date()).toString()
+        })
+
+        await post.save()
+
+        return post.id
+    }
 };
 
 module.exports = { register, login, post }
