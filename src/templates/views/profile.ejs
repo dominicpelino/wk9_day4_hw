@@ -1,5 +1,18 @@
-<%- include ('../partials/header') %> 
+<%- include('../partials/header.ejs') %>
+ 
+<div>
+    <h2><%= user.username %>'s Posts</h2>
+</div>
 
-<h1>Profile</h1>
+<% user.posts.forEach(post => { %>
+         
+    <div class="card" style="width: 36rem;">
+        <div class="card-body">
+            <p class="card-text"><%= post.textBlock %> </p>
+            <a href="#" class="card-link"><%= post.user.username %> </a>
+            <a href="#" class="card-link"></a>
+        </div>
+    </div>
+<% }) %>  
 
-<%- include ('../partials/footer') %> 
+<%- include('../partials/footer.ejs') %>

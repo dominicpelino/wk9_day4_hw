@@ -6,6 +6,9 @@ const schema = require('./src/graphql/schema');
 const path = require('path');
 const { authenticate } = require('./src/middleware/auth');
 const cookieParser = require('cookie-parser');
+const { userData } = require('./src/middleware/userData');
+const { postData } = require('./src/middleware/postData');
+
 
 dotenv.config(); 
 
@@ -14,38 +17,16 @@ const app = express();
 // Connecting DB
 connectDB();
 
+// Middleware (auth)
 app.use(cookieParser());
-
-// Routes
 app.use("/graphql", graphqlHTTP({
     schema,
     graphiql: true
 }));
-
 app.use(express.urlencoded({ extended: true }));
-
-// Middleware (auth)
 app.use(authenticate);
-
-app.get('/', (req, res) => {
-    res.send('Hello Tweeta')
-});
-
-// app.get('/register', (req, res) => {
-//     res.render('pages/register')
-// });
-
-// app.get('/home', (req, res) => {
-//     res.render('pages/index')
-// });
-
-// app.get('/profile', (req, res) => {
-//     res.render('pages/profile', {user:user})
-// });
-
-// app.get('/logout', (req, res) => {
-//     res.render('pages/logout')
-// });
+app.use(userData);
+app.use(postData);
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/src/templates/views'));

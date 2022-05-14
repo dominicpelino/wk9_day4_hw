@@ -1,0 +1,29 @@
+<%- include('../partials/header.ejs') %>
+
+<main class="container">
+    <form action="/post/create" method="POST">
+                <div class="card mt-4" data-question="${i}">
+                    <div class="form-group">
+                        <input type="text" placeholder="What are you up to?" name="postBox" class="form-control" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">Create Post</button>
+            </form>
+    <div class="d-flex justify-content-between align-items-center mt-5 mb-3">
+        <h2 class="my-2">Posts</h2>
+    </div>
+    <hr>
+    <% posts.forEach(post => { %>
+         
+        <div class="card" style="width: 36rem;">
+            <div class="card-body">
+                <p class="card-text"><%= post.textBlock %> </p>
+                <a href="#" class="card-link"><%= post.user.username %> </a>
+                <a href="#" class="card-link"></a>
+            </div>
+        </div>
+    <% }) %>  
+  
+</main>
+
+<%- include('../partials/footer.ejs') %>

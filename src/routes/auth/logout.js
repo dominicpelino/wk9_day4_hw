@@ -1,4 +1,4 @@
 module.exports = (req, res) => {
-    console.log('Login')
-    res.render('login');
+    console.log('Logout')
+    res.render('login')
 }

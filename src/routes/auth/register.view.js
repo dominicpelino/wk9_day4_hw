@@ -1,4 +1,4 @@
 module.exports = (req, res) => {
     console.log('Register')
-    res.render('register');
+    res.render('register')
 }

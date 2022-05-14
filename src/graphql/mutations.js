@@ -1,6 +1,6 @@
 const { GraphQLString, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLInt } = require('graphql')
 const { QuestionInputType, AnswerInputType } = require('./types')
-const { User, Quiz, Question, Submission } = require('../models')
+const { User, Post } = require('../models')
 const { createJwtToken } = require('../util/auth')
 
 const register = {
@@ -47,17 +47,13 @@ const login = {
 const createPost = {
     type: GraphQLString,
     args: {
-        text: {
-            type: GraphQLString
-        },
-        userId: {
-            type: GraphQLString
-        }
+        textBlock: {type: GraphQLString},
+        userId: {type: GraphQLString}
     },
     async resolve(parent, args) {
 
         const post = new Post({
-            text: args.text,
+            textBlock: args.textBlock,
             userId: args.userId,
             createdDate: (new Date()).toString()
         })
@@ -68,4 +64,4 @@ const createPost = {
     }
 };
 
-module.exports = { register, login, post }
+module.exports = { register, login, createPost }

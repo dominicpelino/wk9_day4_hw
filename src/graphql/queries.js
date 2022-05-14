@@ -34,9 +34,9 @@ const postById = {
 
 const posts = {
     type: new GraphQLList(PostType),
-    description: 'Query all posts by a user',
+    description: 'Query all posts',
     resolve(parent, args) {
-        return Post.findById(parent.userId)
+        return Post.find()
     }
 };
 
